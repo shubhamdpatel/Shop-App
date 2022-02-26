@@ -5,15 +5,25 @@ import { Platform } from "react-native";
 // Color
 import Color from "../constant/Color";
 import productOverviewScreen from "../screens/shop/ProductOverviewScreen";
+import productDetailScreen from "../screens/shop/ProductDetailScreen";
 
 const productsNavigator = createStackNavigator(
-  { productOverview: productOverviewScreen },
+  {
+    productOverview: productOverviewScreen,
+    productDetail: productDetailScreen,
+  },
   {
     defaultNavigationOptions: {
       headerStyle: {
         backgroundColor: Platform.OS === "android" ? Color.primary : "",
       },
-      heraderTintColor: Platform.OS === "android" ? "white" : Color.primary,
+      headerTitleStyle: {
+        fontFamily: "open-sans-bold",
+      },
+      headerBackTitleStyle: {
+        fontFamily: "open-sans",
+      },
+      headerTintColor: Platform.OS === "android" ? "white" : Color.primary,
     },
   }
 );
