@@ -1,5 +1,5 @@
-class cartItem {
-  constroctor(quantity, productPrice, productTitle, sum) {
+class CartItem {
+  constructor(quantity, productPrice, productTitle, sum) {
     this.quantity = quantity;
     this.productPrice = productPrice;
     this.productTitle = productTitle;
@@ -7,4 +7,4 @@ class cartItem {
   }
 }
 
-export default cartItem;
+export default CartItem;
