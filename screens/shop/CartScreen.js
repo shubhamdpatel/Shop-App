@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text, FlatList, Button, StyleSheet } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+// Header Button
+import HeaderButton from "../../components/UI/HeaderButton";
 import Colors from "../../constant/Color";
 import CartItem from "../../components/shop/CartItem";
-import { useIsFocused } from "@react-navigation/native";
 import * as cartAction from "../../store/actions/cart";
 import * as ordersAction from "../../store/actions/orders";
 
@@ -12,6 +13,7 @@ const CartScreen = (props) => {
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
   const cartItems = useSelector((state) => {
     const transformedCartItems = [];
+
     for (const key in state.cart.items) {
       transformedCartItems.push({
         productId: key,
@@ -34,7 +36,9 @@ const CartScreen = (props) => {
       <View style={styles.summary}>
         <Text style={styles.summaryText}>
           Total :{" "}
-          <Text style={styles.amount}>${cartTotalAmount.toFixed(2)}</Text>
+          <Text style={styles.amount}>
+            ${Math.round(cartTotalAmount.toFixed(2) * 100) / 100}
+          </Text>
         </Text>
         <Button
           color={Colors.accent}
@@ -63,8 +67,21 @@ const CartScreen = (props) => {
   );
 };
 
-CartScreen.navigationOptions = {
-  headerTitle: "Your Cart",
+CartScreen.navigationOptions = (navData) => {
+  return {
+    headerTitle: "Your Cart",
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item
+          title="Menu"
+          iconName={Platform.OS === "android" ? "md-list" : "ios-list"}
+          onPress={() => {
+            navData.navigation.navigate("orders");
+          }}
+        />
+      </HeaderButtons>
+    ),
+  };
 };
 
 const styles = StyleSheet.create({

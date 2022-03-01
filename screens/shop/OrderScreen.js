@@ -1,10 +1,10 @@
 import React from "react";
-import { FlatList, Text } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { useSelector } from "react-redux";
-
-import { HeaderButtons, Item } from "react-navigation-header-buttons";
-// Header Button
-import HeaderButton from "../../components/UI/HeaderButton";
+import OrderItem from "../../components/shop/OrderItem";
+// import { HeaderButtons, Item } from "react-navigation-header-buttons";
+// // Header Button
+// import HeaderButton from "../../components/UI/HeaderButton";
 
 const OrdersScreen = (props) => {
   const orders = useSelector((state) => state.orders.orders);
@@ -12,7 +12,13 @@ const OrdersScreen = (props) => {
     <FlatList
       data={orders}
       keyExtractor={(item) => item.id}
-      renderItem={(itemData) => <Text>{itemData.item.totalAmount}</Text>}
+      renderItem={(itemData) => (
+        <OrderItem
+          amount={itemData.item.totalAmount}
+          date={itemData.item.redableDate}
+          items={itemData.item.items}
+        />
+      )}
     />
   );
 };
@@ -20,17 +26,17 @@ const OrdersScreen = (props) => {
 OrdersScreen.navigationOptions = (navData) => {
   return {
     headerTitle: "Your Orders",
-    headerLeft: () => (
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item
-          title="Menu"
-          iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
-          onPress={() => {
-            navData.navigation.toggleDrawer();
-          }}
-        />
-      </HeaderButtons>
-    ),
+    // headerLeft: () => (
+    //   <HeaderButtons HeaderButtonComponent={HeaderButton}>
+    //     <Item
+    //       title="Menu"
+    //       iconName={Platform.OS === "android" ? "md-home" : "ios-home"}
+    //       onPress={() => {
+    //         navData.navigation.navigate("order");
+    //       }}
+    //     />
+    //   </HeaderButtons>
+    // ),
   };
 };
 
