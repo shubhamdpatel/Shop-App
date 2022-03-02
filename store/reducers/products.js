@@ -22,6 +22,7 @@ export default (state = initialState, action) => {
         action.productData.description,
         action.productData.price
       );
+
       return {
         ...state,
         availableProduct: state.availableProduct.concat(newProduct),
@@ -32,21 +33,24 @@ export default (state = initialState, action) => {
       const productIndex = state.userProduct.findIndex(
         (prod) => prod.id === action.pid
       );
+
       const updatedProduct = new Product(
         action.pid,
-        state.userProduct[productIndex].ownerId,
+        state.userProduct[productIndex].ownerID,
         action.productData.title,
-        action.productData.imageUrl,
+        action.productData.imageurl,
         action.productData.description,
         state.userProduct[productIndex].price
       );
       const updatedUserProducts = [...state.userProduct];
       updatedUserProducts[productIndex] = updatedProduct;
+
       const availableProductIndex = state.availableProduct.findIndex(
         (prod) => prod.id === action.pid
       );
       const updatedAvailableProducts = [...state.availableProduct];
       updatedAvailableProducts[availableProductIndex] = updatedProduct;
+
       return {
         ...state,
         availableProducts: updatedAvailableProducts,
@@ -57,11 +61,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         userProduct: state.userProduct.filter(
-          (product) => product.id !== action.id
+          (product) => product.id !== action.pid
         ),
 
         availableProduct: state.availableProduct.filter(
-          (product) => product.id !== action.id
+          (product) => product.id !== action.pid
         ),
       };
   }

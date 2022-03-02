@@ -11,7 +11,9 @@ const EditProductScreen = (props) => {
   const editedProduct = useSelector((state) =>
     state.products.userProduct.find((prod) => prod.id === prodId)
   );
+
   const dispatch = useDispatch();
+
   const [title, setTitle] = useState(editedProduct ? editedProduct.title : "");
   const [imageUrl, setImageUrl] = useState(
     editedProduct ? editedProduct.imageUrl : ""
@@ -31,6 +33,7 @@ const EditProductScreen = (props) => {
         productAction.createProduct(title, description, imageUrl, +price)
       );
     }
+    props.navigation.goBack();
   }, [dispatch, prodId, title, description, imageUrl, price]);
 
   useEffect(() => {
@@ -79,6 +82,7 @@ const EditProductScreen = (props) => {
     </ScrollView>
   );
 };
+
 EditProductScreen.navigationOptions = (navData) => {
   const submitFn = navData.navigation.getParam("submit");
   return {
