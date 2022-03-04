@@ -4,6 +4,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import { Platform } from "react-native";
 import Color from "../constant/Color";
 
+import StartUpScreen from "../screens/StartUpScreen";
 import productOverviewScreen from "../screens/shop/ProductOverviewScreen";
 import productDetailScreen from "../screens/shop/ProductDetailScreen";
 import cartScreen from "../screens/shop/CartScreen";
@@ -81,8 +82,9 @@ const AuthNavigator = createStackNavigator(
 );
 
 const mainNavigator = createSwitchNavigator({
+  Start: StartUpScreen,
   Auth: AuthNavigator,
-  shop: ProductsNavigator,
+  Shop: ProductsNavigator,
 });
 
 export default createAppContainer(mainNavigator);

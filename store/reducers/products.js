@@ -8,8 +8,8 @@ import {
 } from "../actions/products";
 
 const initialState = {
-  availableProduct: PRODUCTS,
-  userProduct: PRODUCTS.filter((prod) => prod.ownerID === "u1"),
+  availableProduct: [],
+  userProduct: [],
 };
 
 export default (state = initialState, action) => {
@@ -17,12 +17,12 @@ export default (state = initialState, action) => {
     case SET_PRODUCT:
       return {
         availableProduct: action.products,
-        userProduct: action.products.filter((prod) => prod.ownerID === "u1"),
+        userProduct: action.userProducts,
       };
     case CREATE_PRODUCT:
       const newProduct = new Product(
         action.productData.id,
-        "u1",
+        action.productData.ownerId,
         action.productData.title,
         action.productData.imageUrl,
         action.productData.description,
