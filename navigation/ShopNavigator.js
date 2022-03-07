@@ -1,7 +1,11 @@
-import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import {
+  createAppContainer,
+  createSwitchNavigator,
+  DraertItems,
+} from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 // import { createDrawerNavigator } from "react-navigation-drawer";
-import { Platform } from "react-native";
+import { Platform, View, Button, SafeAreaView } from "react-native";
 import Color from "../constant/Color";
 
 import StartUpScreen from "../screens/StartUpScreen";
